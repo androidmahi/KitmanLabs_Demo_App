@@ -1,9 +1,11 @@
 package com.mahi.kitmanlabs.activity
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,13 +21,17 @@ class MainActivity : ComponentActivity() {
 
   @Inject lateinit var appPreference: AppPreference
 
+  @RequiresApi(Build.VERSION_CODES.O)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContent {
       KitManLabsTheme {
         KitManLabNavigationScreenContent(
-          isUserLoggedIn = appPreference.isUserLoggedIn
+          isUserLoggedIn = appPreference.isUserLoggedIn,
+          onClearLoggedInState = {
+            appPreference.isUserLoggedIn = false
+          }
         )
       }
     }

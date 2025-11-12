@@ -2,13 +2,21 @@ package com.mahi.kitmanlabs.screen.athlete.list.composable
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Logout
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.runtime.Composable
@@ -30,6 +38,7 @@ import com.mahi.kitmanlabs.screen.athlete.list.uiModel.SquadUiModel
 import com.mahi.kitmanlabs.screen.athlete.list.uiModel.isQueryMatched
 import com.mahi.kitmanlabs.screen.athlete.list.viewModel.AthleteInfoUiState
 import com.mahi.kitmanlabs.screen.login.component.TitleBanner
+import com.mahi.kitmanlabs.util.compose.HorizontalSpacer
 import com.mahi.kitmanlabs.util.compose.VerticalSpacer
 import com.mahi.kitmanlabs.util.theme.AppColors
 
@@ -48,15 +57,30 @@ fun AthleteListScreen(
   Scaffold(
     modifier = modifier,
     topBar = {
-      Column(
+      Row (
         modifier = Modifier
           .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
       ) {
+
+        Box(modifier = Modifier.width(52.dp))
+
         TitleBanner(
-          modifier = Modifier
-            .fillMaxWidth(),
           title = "Athlete Details"
+        )
+
+        HorizontalSpacer(10)
+
+        Icon(
+          modifier = Modifier
+            .clickable {
+              //todo show Confirmation dialog Before executing Logout request
+              onEvent.invoke(AthleteScreenEvent.OnLogoutClicked)
+            },
+          imageVector = Icons.Default.Logout,
+          contentDescription = "Logout",
+          tint = AppColors.red
         )
       }
     }

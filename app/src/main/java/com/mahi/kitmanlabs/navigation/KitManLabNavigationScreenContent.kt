@@ -24,7 +24,8 @@ import com.mahi.kitmanlabs.util.screen.ScreenRoutes
 @Composable
 fun KitManLabNavigationScreenContent(
   modifier: Modifier = Modifier,
-  isUserLoggedIn: Boolean
+  isUserLoggedIn: Boolean,
+  onClearLoggedInState: () -> Unit
 ) {
   val navController = rememberNavController()
 
@@ -94,6 +95,14 @@ fun KitManLabNavigationScreenContent(
               }
               is AthleteScreenEvent.OnSearchQueryUpdated -> {
                 viewModel.updateSearchQuery(event.query)
+              }
+
+              AthleteScreenEvent.OnLogoutClicked -> {
+                onClearLoggedInState()
+                navController.navigate(ScreenRoutes.LOGIN.route) {
+                  popUpTo(0) { inclusive = true }
+                  launchSingleTop = true
+                }
               }
             }
           }
