@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="Theme.KitmanLabs" parent="android:Theme.Material.Light.NoActionBar" />
+
+  <!-- res/values/themes.xml -->
+  <!-- Splash screen theme -->
+  <style name="Theme.KitmanLabs.Splash" parent="android:Theme.Black">
+    <!-- Background color of the splash screen -->
+    <item name="android:windowSplashScreenBackground">@color/black</item>
+
+    <!-- The splash icon -->
+    <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+
+    <!-- The icon background color -->
+    <item name="android:windowSplashScreenIconBackgroundColor">@color/black</item>
+
+  </style>
+</resources>
